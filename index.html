@@ -4,87 +4,310 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VCSAX VPN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #fff;
             min-height: 100vh;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            font-family: 'Arial', sans-serif;
-            overflow: hidden;
+            overflow-x: hidden;
+            position: relative;
         }
         
         .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Шапка сайта */
+        header {
             text-align: center;
-            z-index: 1;
+            padding: 40px 20px 30px;
+            position: relative;
+            z-index: 10;
         }
         
-        h1 {
-            color: #e6e6e6;
-            margin-bottom: 40px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        header h1 {
             font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
         
-        .activate-btn {
-            background: linear-gradient(45deg, #0f9d58, #00c853);
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Основное содержимое */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 5;
+            padding: 20px 0 60px;
+        }
+        
+        /* Кнопки */
+        .buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            width: 100%;
+            max-width: 700px;
+            margin-bottom: 50px;
+        }
+        
+        .main-btn {
             color: white;
             border: none;
-            padding: 25px 60px;
-            font-size: 1.8rem;
+            padding: 22px 45px;
+            font-size: 1.4rem;
             font-weight: bold;
             border-radius: 60px;
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(15, 157, 88, 0.4);
             transition: all 0.4s;
-            outline: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-download {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+        }
+        
+        .btn-activate {
+            background: linear-gradient(45deg, #0f9d58, #00c853);
+        }
+        
+        .main-btn:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .main-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .main-btn i {
+            font-size: 1.6rem;
+        }
+        
+        /* Меню опций */
+        .options-menu {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            background: rgba(25, 35, 70, 0.98);
+            border-radius: 25px;
+            padding: 30px;
+            width: 95%;
+            max-width: 500px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(100, 150, 255, 0.3);
+        }
+        
+        .options-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .menu-header h2 {
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .close-btn {
+            background: rgba(255, 255, 255, 0.12);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .close-btn:hover {
+            background: rgba(255, 65, 108, 0.7);
+            transform: rotate(90deg);
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .option-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            padding: 20px 25px;
+            border-radius: 15px;
+            color: #fff;
+            font-size: 1.2rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 20px;
             position: relative;
             overflow: hidden;
         }
         
-        .activate-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(15, 157, 88, 0.6);
+        .option-btn:hover {
+            background: rgba(100, 150, 255, 0.3);
+            transform: translateX(10px);
         }
         
-        .activate-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 5px 20px rgba(15, 157, 88, 0.4);
+        .option-btn i {
+            font-size: 1.6rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            flex-shrink: 0;
         }
         
-        .activate-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 40px;
-            height: 200%;
-            background: rgba(255,255,255,0.3);
-            transform: rotate(30deg);
-            transition: all 0.8s;
+        .option-1 i { background: rgba(79, 172, 254, 0.3); }
+        .option-2 i { background: rgba(0, 200, 83, 0.3); }
+        .option-3 i { background: rgba(255, 65, 108, 0.3); }
+        
+        /* Затемнение фона */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 90;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s;
         }
         
-        .activate-btn:hover::after {
-            left: 120%;
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
         
+        /* Особенности сервиса */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(100, 150, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-card i {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card p {
+            opacity: 0.85;
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+        
+        /* Подвал сайта */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(0, 0, 0, 0.25);
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        /* Анимации фона */
         .particles {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
+            z-index: 1;
         }
         
         .particle {
             position: absolute;
-            width: 6px;
-            height: 6px;
-            background: rgba(15, 157, 88, 0.5);
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             animation: float 15s infinite linear;
         }
@@ -106,39 +329,244 @@
             }
         }
         
-        footer {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
-            color: rgba(255,255,255,0.3);
-            font-size: 0.9rem;
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            header {
+                padding: 30px 15px 20px;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            header p {
+                font-size: 1rem;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+                gap: 20px;
+                padding: 0 10px;
+            }
+            
+            .main-btn {
+                width: 100%;
+                max-width: 400px;
+                padding: 20px 30px;
+                font-size: 1.3rem;
+                justify-content: center;
+            }
+            
+            .main-btn i {
+                font-size: 1.4rem;
+            }
+            
+            .options-menu {
+                padding: 25px 20px;
+                border-radius: 20px;
+            }
+            
+            .menu-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .option-btn {
+                padding: 18px 20px;
+                font-size: 1.1rem;
+                gap: 15px;
+            }
+            
+            .option-btn i {
+                width: 45px;
+                height: 45px;
+                font-size: 1.4rem;
+            }
+            
+            .feature-card {
+                padding: 25px 20px;
+            }
+            
+            .feature-card i {
+                font-size: 3rem;
+            }
+            
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            header p {
+                font-size: 0.95rem;
+            }
+            
+            .main-btn {
+                padding: 18px 25px;
+                font-size: 1.2rem;
+            }
+            
+            .menu-header h2 {
+                font-size: 1.4rem;
+            }
+            
+            .option-btn {
+                font-size: 1rem;
+                padding: 16px 18px;
+                gap: 12px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .feature-card {
+                padding: 22px 18px;
+            }
+            
+            .feature-card i {
+                font-size: 2.8rem;
+                margin-bottom: 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Анимированные частицы фона -->
     <div class="particles" id="particles"></div>
     
     <div class="container">
-        <h1>VCSAX VPN</h1>
-        <button class="activate-btn" onclick="activate()">АКТИВИРОВАТЬ</button>
+        <!-- Шапка сайта -->
+        <header>
+            <h1>VCSAX VPN</h1>
+            <p></p>
+        </header>
+        
+        <!-- Основное содержимое -->
+        <main class="main-content">
+            <!-- Контейнер с кнопками -->
+            <div class="buttons-container">
+                <button class="main-btn btn-download" id="downloadBtn">
+                    <i class="fas fa-download"></i> СКАЧАТЬ НА ПК
+                </button>
+                <button class="main-btn btn-activate" id="activateBtn">
+                    <i class="fas fa-bolt"></i> ВЫБРАТЬ СЕРВЕР
+                </button>
+            </div>
+            
+            <!-- Особенности сервиса -->
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>Полная безопасность</h3>
+                    <p>Шифрование военного уровня защищает ваши данные от посторонних глаз</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Максимальная скорость</h3>
+                    <p>Оптимизированные серверы обеспечивают молниеносное соединение</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-globe-americas"></i>
+                    <h3>Глобальный доступ</h3>
+                    <p>Доступ к контенту из любой точки мира без ограничений</p>
+                </div>
+            </div>
+        </main>
     </div>
     
+    <!-- Меню опций (изначально скрыто) -->
+    <div class="options-menu" id="optionsMenu">
+        <div class="menu-header">
+            <h2>Выберите сервер</h2>
+            <button class="close-btn" id="closeMenu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="options-grid">
+            <button class="option-btn option-1" id="option1">
+                <i class="fas fa-rocket"></i>
+                <span>Сервер Poland</span>
+            </button>
+            <button class="option-btn option-2" id="option2">
+                <i class="fas fa-shield-alt"></i>
+                <span>Сервер USA</span>
+            </button>
+            <button class="option-btn option-3" id="option3">
+                <i class="fas fa-globe"></i>
+                <span>Сервер Russia (Для Youtube)</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Затемнение фона при открытом меню -->
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Подвал сайта -->
     <footer>
-        
+        <p>https://t.me/vcsaxvpn</p>
     </footer>
 
     <script>
-        // Функция перенаправления
-        function activate() {
-            // Замените ссылку ниже на нужный вам URL
-            window.location.href = "v2raytun://import/vless://a4d90a33-57e0-489a-87d7-a9414660048c@8.cdnconn.com:8443?security=reality&type=tcp&headerType=&flow=xtls-rprx-vision&path=&host=&sni=icloud.com&fp=chrome&pbk=7Gi8eiUU9TIVbGuvSU16gl5-Aqt7tcCSB9x6CSxyvik&sid=67b1e94e4dd1ef90#%F0%9F%87%BC%F0%9F%87%AB%20%5BUV%5D%20VCSAX%20VPN%20";
+        // Элементы DOM
+        const activateBtn = document.getElementById('activateBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const optionsMenu = document.getElementById('optionsMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        const overlay = document.getElementById('overlay');
+        const option1 = document.getElementById('option1');
+        const option2 = document.getElementById('option2');
+        const option3 = document.getElementById('option3');
+        
+        // Ссылки для перехода (замените на свои)
+        const downloadLink = "https://www.dropbox.com/scl/fi/2uyjb138feziiziy5go6q/v2RayTun_Setup.exe?rlkey=u94t67xjvo594onl33k71lybr&st=vzoxtp14&dl=1";
+        const option1Link = "v2raytun://import/vless://a4d90a33-57e0-489a-87d7-a9414660048c@3.cdnconn.com:8443?security=reality&type=tcp&headerType=&flow=xtls-rprx-vision&path=&host=&sni=icloud.com&fp=chrome&pbk=7Gi8eiUU9TIVbGuvSU16gl5-Aqt7tcCSB9x6CSxyvik&sid=67b1e94e4dd1ef90#%F0%9F%87%B5%F0%9F%87%B1%20%5BPL%5D%20VCSAX%20VPN";
+        const option2Link = "v2raytun://import/vless://a4d90a33-57e0-489a-87d7-a9414660048c@7.cdnconn.com:8443?security=reality&type=tcp&headerType=&flow=xtls-rprx-vision&path=&host=&sni=icloud.com&fp=chrome&pbk=7Gi8eiUU9TIVbGuvSU16gl5-Aqt7tcCSB9x6CSxyvik&sid=67b1e94e4dd1ef90#%F0%9F%87%BA%F0%9F%87%B8%20%5BUS%5D%20VCSAX%20VPN";
+        const option3Link = "v2raytun://import/vless://a4d90a33-57e0-489a-87d7-a9414660048c@5.cdnconn.com:8443?security=reality&type=tcp&headerType=&flow=xtls-rprx-vision&path=&host=&sni=icloud.com&fp=chrome&pbk=7Gi8eiUU9TIVbGuvSU16gl5-Aqt7tcCSB9x6CSxyvik&sid=67b1e94e4dd1ef90#%F0%9F%87%B7%F0%9F%87%BA%20%5BRU%5D%20VCSAX%20VPN";
+        
+        // Открытие меню активации
+        activateBtn.addEventListener('click', () => {
+            optionsMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // Закрытие меню
+        function closeOptionsMenu() {
+            optionsMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
         }
+        
+        closeMenu.addEventListener('click', closeOptionsMenu);
+        overlay.addEventListener('click', closeOptionsMenu);
+        
+        // Переход по ссылкам
+        downloadBtn.addEventListener('click', () => {
+            window.location.href = downloadLink;
+        });
+        
+        option1.addEventListener('click', () => {
+            window.location.href = option1Link;
+        });
+        
+        option2.addEventListener('click', () => {
+            window.location.href = option2Link;
+        });
+        
+        option3.addEventListener('click', () => {
+            window.location.href = option3Link;
+        });
         
         // Создание анимированных частиц фона
         function createParticles() {
             const container = document.getElementById('particles');
-            const particleCount = 50;
+            const particleCount = window.innerWidth < 768 ? 30 : 50;
+            const colors = ['#4facfe', '#00f2fe', '#ff416c', '#0f9d58'];
             
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
@@ -151,20 +579,37 @@
                 particle.style.top = `${posY}vh`;
                 
                 // Случайный размер
-                const size = Math.random() * 8 + 2;
+                const size = Math.random() * 6 + 2;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
+                
+                // Случайный цвет
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.backgroundColor = color;
                 
                 // Случайная задержка анимации
                 const delay = Math.random() * 15;
                 particle.style.animationDelay = `${delay}s`;
                 
-                container.appendChild(particle);
+                // Случайная длительность анимации
+                const duration = 10 + Math.random() * 20;
+                particle.style.animationDuration = `${duration}s`;
+                
+                document.querySelector('.particles').appendChild(particle);
             }
         }
         
         // Инициализация при загрузке страницы
-        window.addEventListener('load', createParticles);
+        window.addEventListener('load', () => {
+            createParticles();
+        });
+        
+        // Закрытие меню при нажатии Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && optionsMenu.classList.contains('active')) {
+                closeOptionsMenu();
+            }
+        });
     </script>
 </body>
 </html>
