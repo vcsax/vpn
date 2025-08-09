@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VCSAX VPN</title>
+    <title>Премиум VPN Сервис</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -19,6 +19,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            line-height: 1.6;
         }
         
         .container {
@@ -49,7 +50,6 @@
             opacity: 0.85;
             max-width: 600px;
             margin: 0 auto;
-            line-height: 1.6;
         }
         
         /* Основное содержимое */
@@ -67,29 +67,31 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 25px;
+            gap: 20px;
             width: 100%;
-            max-width: 700px;
+            max-width: 800px;
             margin-bottom: 50px;
         }
         
         .main-btn {
             color: white;
             border: none;
-            padding: 22px 45px;
-            font-size: 1.4rem;
+            padding: 20px 40px;
+            font-size: 1.3rem;
             font-weight: bold;
             border-radius: 60px;
             cursor: pointer;
             transition: all 0.4s;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             position: relative;
             overflow: hidden;
             z-index: 2;
             text-align: center;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            min-width: 250px;
+            justify-content: center;
         }
         
         .btn-download {
@@ -98,6 +100,10 @@
         
         .btn-activate {
             background: linear-gradient(45deg, #0f9d58, #00c853);
+        }
+        
+        .btn-instruction {
+            background: linear-gradient(45deg, #2193b0, #6dd5ed);
         }
         
         .main-btn:hover {
@@ -111,11 +117,11 @@
         }
         
         .main-btn i {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
         }
         
         /* Меню опций */
-        .options-menu {
+        .modal {
             position: fixed;
             top: 50%;
             left: 50%;
@@ -134,13 +140,13 @@
             border: 1px solid rgba(100, 150, 255, 0.3);
         }
         
-        .options-menu.active {
+        .modal.active {
             opacity: 1;
             visibility: visible;
             transform: translate(-50%, -50%) scale(1);
         }
         
-        .menu-header {
+        .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -149,7 +155,7 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         }
         
-        .menu-header h2 {
+        .modal-header h2 {
             font-size: 1.8rem;
             background: linear-gradient(90deg, #4facfe, #00f2fe);
             -webkit-background-clip: text;
@@ -216,6 +222,32 @@
         .option-1 i { background: rgba(79, 172, 254, 0.3); }
         .option-2 i { background: rgba(0, 200, 83, 0.3); }
         .option-3 i { background: rgba(255, 65, 108, 0.3); }
+        
+        /* Инструкция */
+        .instruction-content {
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 15px;
+        }
+        
+        .instruction-content h3 {
+            margin: 20px 0 10px;
+            color: #4facfe;
+        }
+        
+        .instruction-content p {
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        
+        .instruction-content ol {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .instruction-content li {
+            margin-bottom: 10px;
+        }
         
         /* Затемнение фона */
         .overlay {
@@ -330,6 +362,18 @@
         }
         
         /* Адаптивность */
+        @media (max-width: 900px) {
+            .buttons-container {
+                gap: 15px;
+            }
+            
+            .main-btn {
+                min-width: 200px;
+                padding: 18px 30px;
+                font-size: 1.2rem;
+            }
+        }
+        
         @media (max-width: 768px) {
             header {
                 padding: 30px 15px 20px;
@@ -345,29 +389,24 @@
             
             .buttons-container {
                 flex-direction: column;
-                gap: 20px;
+                gap: 15px;
                 padding: 0 10px;
             }
             
             .main-btn {
                 width: 100%;
                 max-width: 400px;
-                padding: 20px 30px;
-                font-size: 1.3rem;
-                justify-content: center;
+                padding: 18px 25px;
+                font-size: 1.2rem;
             }
             
-            .main-btn i {
-                font-size: 1.4rem;
-            }
-            
-            .options-menu {
+            .modal {
                 padding: 25px 20px;
                 border-radius: 20px;
             }
             
-            .menu-header h2 {
-                font-size: 1.5rem;
+            .modal-header h2 {
+                font-size: 1.6rem;
             }
             
             .option-btn {
@@ -404,19 +443,16 @@
                 font-size: 0.95rem;
             }
             
-            .main-btn {
-                padding: 18px 25px;
-                font-size: 1.2rem;
-            }
-            
-            .menu-header h2 {
+            .modal-header h2 {
                 font-size: 1.4rem;
             }
             
-            .option-btn {
-                font-size: 1rem;
-                padding: 16px 18px;
-                gap: 12px;
+            .instruction-content {
+                font-size: 0.95rem;
+            }
+            
+            .instruction-content h3 {
+                font-size: 1.2rem;
             }
             
             .features {
@@ -443,7 +479,7 @@
         <!-- Шапка сайта -->
         <header>
             <h1>VCSAX VPN</h1>
-            <p></p>
+            <p>Безопасный доступ к интернету без ограничений и цензуры</p>
         </header>
         
         <!-- Основное содержимое -->
@@ -451,10 +487,13 @@
             <!-- Контейнер с кнопками -->
             <div class="buttons-container">
                 <button class="main-btn btn-download" id="downloadBtn">
-                    <i class="fas fa-download"></i> СКАЧАТЬ НА ПК
+                    <i class="fas fa-download"></i> СКАЧАТЬ
                 </button>
                 <button class="main-btn btn-activate" id="activateBtn">
                     <i class="fas fa-bolt"></i> ВЫБРАТЬ СЕРВЕР
+                </button>
+                <button class="main-btn btn-instruction" id="instructionBtn">
+                    <i class="fas fa-book"></i> ИНСТРУКЦИЯ
                 </button>
             </div>
             
@@ -463,27 +502,29 @@
                 <div class="feature-card">
                     <i class="fas fa-lock"></i>
                     <h3>Полная безопасность</h3>
-                    <p>Шифрование военного уровня защищает ваши данные от посторонних глаз</p>
+                    <p>Военное шифрование AES-256 защищает ваши данные от хакеров и слежки</p>
                 </div>
                 <div class="feature-card">
                     <i class="fas fa-bolt"></i>
-                    <h3>Максимальная скорость</h3>
-                    <p>Оптимизированные серверы обеспечивают молниеносное соединение</p>
+                    <h3>Высокая скорость</h3>
+                    <p>Оптимизированные серверы обеспечивают скорость до 1 Гбит/с</p>
                 </div>
                 <div class="feature-card">
                     <i class="fas fa-globe-americas"></i>
-                    <h3>Глобальный доступ</h3>
-                    <p>Доступ к контенту из любой точки мира без ограничений</p>
+                    <h3>Доступ к контенту</h3>
+                    <p>Обходите географические ограничения и цензуру</p>
                 </div>
             </div>
         </main>
     </div>
     
-    <!-- Меню опций (изначально скрыто) -->
-    <div class="options-menu" id="optionsMenu">
-        <div class="menu-header">
+    <!-- Модальные окна -->
+    
+    <!-- Меню активации -->
+    <div class="modal" id="activateMenu">
+        <div class="modal-header">
             <h2>Выберите сервер</h2>
-            <button class="close-btn" id="closeMenu">
+            <button class="close-btn" id="closeActivateMenu">
                 <i class="fas fa-times"></i>
             </button>
         </div>
@@ -503,53 +544,121 @@
         </div>
     </div>
     
+    <!-- Меню скачивания -->
+    <div class="modal" id="downloadMenu">
+        <div class="modal-header">
+            <h2>Скачать приложение</h2>
+            <button class="close-btn" id="closeDownloadMenu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="options-grid">
+            <button class="option-btn option-1" id="downloadPc">
+                <i class="fas fa-desktop"></i>
+                <span>Скачать для Windows</span>
+            </button>
+            <button class="option-btn option-2" id="downloadAndroid">
+                <i class="fab fa-android"></i>
+                <span>Скачать для Android</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Инструкция -->
+    <div class="modal" id="instructionModal">
+        <div class="modal-header">
+            <h2>Инструкция по использованию</h2>
+            <button class="close-btn" id="closeInstruction">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="instruction-content">
+            <h3>Как активировать VPN</h3>
+            <ol>
+                <li>Скачайте приложение с сайта</li>
+                <li>Выберите сервер</li>
+                <li>Активируйте впн в приложении</li>
+            <ol>
+        </div>
+    </div>
+    
     <!-- Затемнение фона при открытом меню -->
     <div class="overlay" id="overlay"></div>
     
     <!-- Подвал сайта -->
     <footer>
-        <p>https://t.me/vcsaxvpn</p>
+        <p>VCSAX VPN</p>
     </footer>
 
     <script>
         // Элементы DOM
         const activateBtn = document.getElementById('activateBtn');
         const downloadBtn = document.getElementById('downloadBtn');
-        const optionsMenu = document.getElementById('optionsMenu');
-        const closeMenu = document.getElementById('closeMenu');
+        const instructionBtn = document.getElementById('instructionBtn');
+        
+        const activateMenu = document.getElementById('activateMenu');
+        const downloadMenu = document.getElementById('downloadMenu');
+        const instructionModal = document.getElementById('instructionModal');
+        
+        const closeActivateMenu = document.getElementById('closeActivateMenu');
+        const closeDownloadMenu = document.getElementById('closeDownloadMenu');
+        const closeInstruction = document.getElementById('closeInstruction');
+        
         const overlay = document.getElementById('overlay');
+        
         const option1 = document.getElementById('option1');
         const option2 = document.getElementById('option2');
         const option3 = document.getElementById('option3');
         
+        const downloadPc = document.getElementById('downloadPc');
+        const downloadAndroid = document.getElementById('downloadAndroid');
+        
         // Ссылки для перехода (замените на свои)
-        const downloadLink = "https://www.dropbox.com/scl/fi/2uyjb138feziiziy5go6q/v2RayTun_Setup.exe?rlkey=u94t67xjvo594onl33k71lybr&st=vzoxtp14&dl=1";
         const option1Link = "v2raytun://import/vless://a4d90a33-57e0-489a-87d7-a9414660048c@3.cdnconn.com:8443?security=reality&type=tcp&headerType=&flow=xtls-rprx-vision&path=&host=&sni=icloud.com&fp=chrome&pbk=7Gi8eiUU9TIVbGuvSU16gl5-Aqt7tcCSB9x6CSxyvik&sid=67b1e94e4dd1ef90#%F0%9F%87%B5%F0%9F%87%B1%20%5BPL%5D%20VCSAX%20VPN";
         const option2Link = "v2raytun://import/vless://a4d90a33-57e0-489a-87d7-a9414660048c@7.cdnconn.com:8443?security=reality&type=tcp&headerType=&flow=xtls-rprx-vision&path=&host=&sni=icloud.com&fp=chrome&pbk=7Gi8eiUU9TIVbGuvSU16gl5-Aqt7tcCSB9x6CSxyvik&sid=67b1e94e4dd1ef90#%F0%9F%87%BA%F0%9F%87%B8%20%5BUS%5D%20VCSAX%20VPN";
         const option3Link = "v2raytun://import/vless://a4d90a33-57e0-489a-87d7-a9414660048c@5.cdnconn.com:8443?security=reality&type=tcp&headerType=&flow=xtls-rprx-vision&path=&host=&sni=icloud.com&fp=chrome&pbk=7Gi8eiUU9TIVbGuvSU16gl5-Aqt7tcCSB9x6CSxyvik&sid=67b1e94e4dd1ef90#%F0%9F%87%B7%F0%9F%87%BA%20%5BRU%5D%20VCSAX%20VPN";
         
-        // Открытие меню активации
-        activateBtn.addEventListener('click', () => {
-            optionsMenu.classList.add('active');
+        const pcDownloadLink = "https://www.dropbox.com/scl/fi/2uyjb138feziiziy5go6q/v2RayTun_Setup.exe?rlkey=u94t67xjvo594onl33k71lybr&st=vzoxtp14&dl=1";
+        const androidDownloadLink = "https://play.google.com/store/apps/details?id=com.v2raytun.android";
+        
+        // Функция для открытия модального окна
+        function openModal(modal) {
+            modal.classList.add('active');
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
-        });
+        }
         
-        // Закрытие меню
-        function closeOptionsMenu() {
-            optionsMenu.classList.remove('active');
+        // Функция для закрытия всех модальных окон
+        function closeAllModals() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.classList.remove('active');
+            });
             overlay.classList.remove('active');
             document.body.style.overflow = '';
         }
         
-        closeMenu.addEventListener('click', closeOptionsMenu);
-        overlay.addEventListener('click', closeOptionsMenu);
-        
-        // Переход по ссылкам
-        downloadBtn.addEventListener('click', () => {
-            window.location.href = downloadLink;
+        // Открытие меню активации
+        activateBtn.addEventListener('click', () => {
+            openModal(activateMenu);
         });
         
+        // Открытие меню скачивания
+        downloadBtn.addEventListener('click', () => {
+            openModal(downloadMenu);
+        });
+        
+        // Открытие инструкции
+        instructionBtn.addEventListener('click', () => {
+            openModal(instructionModal);
+        });
+        
+        // Закрытие модальных окон
+        closeActivateMenu.addEventListener('click', closeAllModals);
+        closeDownloadMenu.addEventListener('click', closeAllModals);
+        closeInstruction.addEventListener('click', closeAllModals);
+        overlay.addEventListener('click', closeAllModals);
+        
+        // Переход по ссылкам активации
         option1.addEventListener('click', () => {
             window.location.href = option1Link;
         });
@@ -560,6 +669,15 @@
         
         option3.addEventListener('click', () => {
             window.location.href = option3Link;
+        });
+        
+        // Переход по ссылкам скачивания
+        downloadPc.addEventListener('click', () => {
+            window.location.href = pcDownloadLink;
+        });
+        
+        downloadAndroid.addEventListener('click', () => {
+            window.location.href = androidDownloadLink;
         });
         
         // Создание анимированных частиц фона
@@ -606,8 +724,8 @@
         
         // Закрытие меню при нажатии Escape
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && optionsMenu.classList.contains('active')) {
-                closeOptionsMenu();
+            if (e.key === 'Escape') {
+                closeAllModals();
             }
         });
     </script>
