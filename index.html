@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Премиум VPN Сервис</title>
+    <title>VCSAX VPN</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -120,7 +120,7 @@
             font-size: 1.5rem;
         }
         
-        /* Меню опций */
+        /* Модальные окна */
         .modal {
             position: fixed;
             top: 50%;
@@ -479,7 +479,7 @@
         <!-- Шапка сайта -->
         <header>
             <h1>VCSAX VPN</h1>
-            <p>Безопасный доступ к интернету без ограничений и цензуры</p>
+            <p>Мгновенная активация и безопасный доступ к интернету</p>
         </header>
         
         <!-- Основное содержимое -->
@@ -490,7 +490,7 @@
                     <i class="fas fa-download"></i> СКАЧАТЬ
                 </button>
                 <button class="main-btn btn-activate" id="activateBtn">
-                    <i class="fas fa-bolt"></i> ВЫБРАТЬ СЕРВЕР
+                    <i class="fas fa-bolt"></i> АКТИВИРОВАТЬ
                 </button>
                 <button class="main-btn btn-instruction" id="instructionBtn">
                     <i class="fas fa-book"></i> ИНСТРУКЦИЯ
@@ -500,49 +500,25 @@
             <!-- Особенности сервиса -->
             <div class="features">
                 <div class="feature-card">
-                    <i class="fas fa-lock"></i>
-                    <h3>Полная безопасность</h3>
-                    <p>Военное шифрование AES-256 защищает ваши данные от хакеров и слежки</p>
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>РОСКОМНАДЗОРУ-НЕТ!</h3>
+                    <p>Все блокировки будут сняты!</p>
                 </div>
                 <div class="feature-card">
-                    <i class="fas fa-bolt"></i>
+                    <i class="fas fa-tachometer-alt"></i>
                     <h3>Высокая скорость</h3>
-                    <p>Оптимизированные серверы обеспечивают скорость до 1 Гбит/с</p>
+                    <p>Оптимизированные серверы обеспечивают высокую скорость</p>
                 </div>
                 <div class="feature-card">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3>Доступ к контенту</h3>
-                    <p>Обходите географические ограничения и цензуру</p>
+                    <i class="fas fa-globe"></i>
+                    <h3>Полный доступ</h3>
+                    <p>Обходите географические ограничения и цензуру в любом месте</p>
                 </div>
             </div>
         </main>
     </div>
     
     <!-- Модальные окна -->
-    
-    <!-- Меню активации -->
-    <div class="modal" id="activateMenu">
-        <div class="modal-header">
-            <h2>Выберите сервер</h2>
-            <button class="close-btn" id="closeActivateMenu">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="options-grid">
-            <button class="option-btn option-1" id="option1">
-                <i class="fas fa-rocket"></i>
-                <span>Сервер Poland</span>
-            </button>
-            <button class="option-btn option-2" id="option2">
-                <i class="fas fa-shield-alt"></i>
-                <span>Сервер USA</span>
-            </button>
-            <button class="option-btn option-3" id="option3">
-                <i class="fas fa-globe"></i>
-                <span>Сервер Russia (Для Youtube)</span>
-            </button>
-        </div>
-    </div>
     
     <!-- Меню скачивания -->
     <div class="modal" id="downloadMenu">
@@ -574,11 +550,9 @@
         </div>
         <div class="instruction-content">
             <h3>Как активировать VPN</h3>
-            <ol>
-                <li>Скачайте приложение с сайта</li>
-                <li>Выберите сервер</li>
-                <li>Активируйте впн в приложении</li>
-            <ol>
+            <p>Скачайте приложение с сайта</p>
+            <p>Выберите сервер</p>
+            <p>Активируйте впн в приложении</p>
         </div>
     </div>
     
@@ -587,7 +561,7 @@
     
     <!-- Подвал сайта -->
     <footer>
-        <p>VCSAX VPN</p>
+        <p>t.me/vcsaxvpn</p>
     </footer>
 
     <script>
@@ -596,28 +570,19 @@
         const downloadBtn = document.getElementById('downloadBtn');
         const instructionBtn = document.getElementById('instructionBtn');
         
-        const activateMenu = document.getElementById('activateMenu');
         const downloadMenu = document.getElementById('downloadMenu');
         const instructionModal = document.getElementById('instructionModal');
         
-        const closeActivateMenu = document.getElementById('closeActivateMenu');
         const closeDownloadMenu = document.getElementById('closeDownloadMenu');
         const closeInstruction = document.getElementById('closeInstruction');
         
         const overlay = document.getElementById('overlay');
         
-        const option1 = document.getElementById('option1');
-        const option2 = document.getElementById('option2');
-        const option3 = document.getElementById('option3');
-        
         const downloadPc = document.getElementById('downloadPc');
         const downloadAndroid = document.getElementById('downloadAndroid');
         
         // Ссылки для перехода (замените на свои)
-        const option1Link = "v2raytun://import/vless://a4d90a33-57e0-489a-87d7-a9414660048c@3.cdnconn.com:8443?security=reality&type=tcp&headerType=&flow=xtls-rprx-vision&path=&host=&sni=icloud.com&fp=chrome&pbk=7Gi8eiUU9TIVbGuvSU16gl5-Aqt7tcCSB9x6CSxyvik&sid=67b1e94e4dd1ef90#%F0%9F%87%B5%F0%9F%87%B1%20%5BPL%5D%20VCSAX%20VPN";
-        const option2Link = "v2raytun://import/vless://a4d90a33-57e0-489a-87d7-a9414660048c@7.cdnconn.com:8443?security=reality&type=tcp&headerType=&flow=xtls-rprx-vision&path=&host=&sni=icloud.com&fp=chrome&pbk=7Gi8eiUU9TIVbGuvSU16gl5-Aqt7tcCSB9x6CSxyvik&sid=67b1e94e4dd1ef90#%F0%9F%87%BA%F0%9F%87%B8%20%5BUS%5D%20VCSAX%20VPN";
-        const option3Link = "v2raytun://import/vless://a4d90a33-57e0-489a-87d7-a9414660048c@5.cdnconn.com:8443?security=reality&type=tcp&headerType=&flow=xtls-rprx-vision&path=&host=&sni=icloud.com&fp=chrome&pbk=7Gi8eiUU9TIVbGuvSU16gl5-Aqt7tcCSB9x6CSxyvik&sid=67b1e94e4dd1ef90#%F0%9F%87%B7%F0%9F%87%BA%20%5BRU%5D%20VCSAX%20VPN";
-        
+        const activationLink = "v2raytun://import/https://vcsax.github.io/import";
         const pcDownloadLink = "https://www.dropbox.com/scl/fi/2uyjb138feziiziy5go6q/v2RayTun_Setup.exe?rlkey=u94t67xjvo594onl33k71lybr&st=vzoxtp14&dl=1";
         const androidDownloadLink = "https://play.google.com/store/apps/details?id=com.v2raytun.android";
         
@@ -637,9 +602,9 @@
             document.body.style.overflow = '';
         }
         
-        // Открытие меню активации
+        // Активация - прямой переход по ссылке
         activateBtn.addEventListener('click', () => {
-            openModal(activateMenu);
+            window.location.href = activationLink;
         });
         
         // Открытие меню скачивания
@@ -653,23 +618,9 @@
         });
         
         // Закрытие модальных окон
-        closeActivateMenu.addEventListener('click', closeAllModals);
         closeDownloadMenu.addEventListener('click', closeAllModals);
         closeInstruction.addEventListener('click', closeAllModals);
         overlay.addEventListener('click', closeAllModals);
-        
-        // Переход по ссылкам активации
-        option1.addEventListener('click', () => {
-            window.location.href = option1Link;
-        });
-        
-        option2.addEventListener('click', () => {
-            window.location.href = option2Link;
-        });
-        
-        option3.addEventListener('click', () => {
-            window.location.href = option3Link;
-        });
         
         // Переход по ссылкам скачивания
         downloadPc.addEventListener('click', () => {
@@ -720,6 +671,17 @@
         // Инициализация при загрузке страницы
         window.addEventListener('load', () => {
             createParticles();
+            
+            // Анимация кнопки активации
+            const animateActivateBtn = () => {
+                activateBtn.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    activateBtn.style.transform = 'scale(1)';
+                }, 300);
+            };
+            
+            // Пульсация кнопки активации каждые 3 секунды
+            setInterval(animateActivateBtn, 3000);
         });
         
         // Закрытие меню при нажатии Escape
@@ -727,6 +689,15 @@
             if (e.key === 'Escape') {
                 closeAllModals();
             }
+        });
+        
+        // Эффект наведения для кнопки активации
+        activateBtn.addEventListener('mouseenter', () => {
+            activateBtn.style.boxShadow = '0 0 30px rgba(15, 157, 88, 0.8)';
+        });
+        
+        activateBtn.addEventListener('mouseleave', () => {
+            activateBtn.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.3)';
         });
     </script>
 </body>
