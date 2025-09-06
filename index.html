@@ -520,6 +520,26 @@
     
     <!-- Модальные окна -->
     
+    <!-- Меню активации -->
+    <div class="modal" id="activateMenu">
+        <div class="modal-header">
+            <h2>Варианты активации</h2>
+            <button class="close-btn" id="closeActivateMenu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="options-grid">
+            <button class="option-btn option-1" id="activateVpn">
+                <i class="fas fa-shield-alt"></i>
+                <span>АКТИВИРОВАТЬ ВПН</span>
+            </button>
+            <button class="option-btn option-2" id="getConfig">
+                <i class="fas fa-code"></i>
+                <span>ПОЛУЧИТЬ КОНФИГ</span>
+            </button>
+        </div>
+    </div>
+    
     <!-- Меню скачивания -->
     <div class="modal" id="downloadMenu">
         <div class="modal-header">
@@ -570,20 +590,25 @@
         const downloadBtn = document.getElementById('downloadBtn');
         const instructionBtn = document.getElementById('instructionBtn');
         
+        const activateMenu = document.getElementById('activateMenu');
         const downloadMenu = document.getElementById('downloadMenu');
         const instructionModal = document.getElementById('instructionModal');
         
+        const closeActivateMenu = document.getElementById('closeActivateMenu');
         const closeDownloadMenu = document.getElementById('closeDownloadMenu');
         const closeInstruction = document.getElementById('closeInstruction');
         
         const overlay = document.getElementById('overlay');
         
+        const activateVpn = document.getElementById('activateVpn');
+        const getConfig = document.getElementById('getConfig');
         const downloadPc = document.getElementById('downloadPc');
         const downloadAndroid = document.getElementById('downloadAndroid');
         
         // Ссылки для перехода (замените на свои)
         const activationLink = "v2raytun://import/https://vcsax.github.io/import";
-        const pcDownloadLink = "https://www.dropbox.com/scl/fi/2uyjb138feziiziy5go6q/v2RayTun_Setup.exe?rlkey=u94t67xjvo594onl33k71lybr&st=vzoxtp14&dl=1";
+        const configLink = "hiddify://import/https://vcsax.github.io/import/";
+        const pcDownloadLink = "https://github.com/hiddify/hiddify-app/releases/download/v2.0.5/Hiddify-Windows-Setup-x64.exe";
         const androidDownloadLink = "https://play.google.com/store/apps/details?id=com.v2raytun.android";
         
         // Функция для открытия модального окна
@@ -602,9 +627,9 @@
             document.body.style.overflow = '';
         }
         
-        // Активация - прямой переход по ссылке
+        // Открытие меню активации
         activateBtn.addEventListener('click', () => {
-            window.location.href = activationLink;
+            openModal(activateMenu);
         });
         
         // Открытие меню скачивания
@@ -618,9 +643,19 @@
         });
         
         // Закрытие модальных окон
+        closeActivateMenu.addEventListener('click', closeAllModals);
         closeDownloadMenu.addEventListener('click', closeAllModals);
         closeInstruction.addEventListener('click', closeAllModals);
         overlay.addEventListener('click', closeAllModals);
+        
+        // Переход по ссылкам активации
+        activateVpn.addEventListener('click', () => {
+            window.location.href = activationLink;
+        });
+        
+        getConfig.addEventListener('click', () => {
+            window.location.href = configLink;
+        });
         
         // Переход по ссылкам скачивания
         downloadPc.addEventListener('click', () => {
